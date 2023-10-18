@@ -1,0 +1,26 @@
+#include <iostream>
+
+class Counter {
+private:
+    int count;
+
+public:
+    Counter() : count(0) {}
+
+    void operator++() {
+        count++;
+    }
+
+    int getCount() {
+        return count;
+    }
+};
+
+int main() {
+    Counter counter;
+    ++counter;  // Overloaded ++ operator
+
+    std::cout << "Count: " << counter.getCount() << std::endl;
+
+    return 0;
+}
