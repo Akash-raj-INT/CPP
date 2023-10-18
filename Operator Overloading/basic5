@@ -1,0 +1,34 @@
+#include <iostream>
+
+class MyArray {
+private:
+    int arr[5];
+
+public:
+    MyArray() {
+        for (int i = 0; i < 5; i++) {
+            arr[i] = i * 10;
+        }
+    }
+
+    int& operator[](int index) {
+        if (index >= 0 && index < 5) {
+            return arr[index];
+        } else {
+            throw std::out_of_range("Index out of range");
+        }
+    }
+};
+
+int main() {
+    MyArray myArray;
+
+    try {
+        int value = myArray[2];  // Overloaded [] operator
+        std::cout << "Value at index 2: " << value << std::endl;
+    } catch (const std::out_of_range& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    return 0;
+}
