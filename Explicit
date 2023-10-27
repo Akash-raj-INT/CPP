@@ -1,0 +1,11 @@
+#include <iostream>
+
+int main() {
+    double num1 = 3.14;
+    int num2 = static_cast<int>(num1); // Explicit type conversion from double to int
+
+    std::cout << "Original (double): " << num1 << std::endl;
+    std::cout << "Converted (int): " << num2 << std::endl;
+
+    return 0;
+}
