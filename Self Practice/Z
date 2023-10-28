@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+// Function to check if the file is empty
+bool isFileEmpty(const string& filename) {
+    ifstream file(filename);
+    return file.peek() == ifstream::traits_type::eof();
+}
+
+int main() {
+    int numberCount;
+    cin >> numberCount;
+
+    const string filename = "numbers.txt";
+
+    if (isFileEmpty(filename)) {
+        cout << "File is empty" << endl;
+
+        // Adding numbers starting from 100
+        ofstream outFile(filename);
+        if (outFile.is_open()) {
+            for (int i = 100; i < 100 + numberCount; ++i) {
+                outFile << i << endl;
+            }
+            outFile.close();
+            cout << "Adding " << numberCount << " numbers starting from 100" << endl;
+            cout << "Success" << endl;
+        } else {
+            cout << "Failed to open the file for writing." << endl;
+        }
+    } else {
+        cout << "Failed" << endl;
+    }
+
+    return 0;
+}
