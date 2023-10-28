@@ -1,0 +1,105 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+using namespace std;
+
+const string phoneBookFileName = "phonebook.txt";
+
+// Function to create a phone book
+bool createPhoneBook() {
+    ofstream outFile(phoneBookFileName);
+    return outFile.is_open();
+}
+
+// Function to add a contact to the phone book
+bool addContact(const string& name, const string& number) {
+    ofstream outFile(phoneBookFileName, ios::app);
+    if (!outFile.is_open()) {
+        return false;
+    }
+    outFile << name << " " << number << endl;
+    return true;
+}
+
+// Function to delete the phone book
+bool deletePhoneBook() {
+    return remove(phoneBookFileName.c_str()) == 0;
+}
+
+// Function to read and display the phone book
+void readPhoneBook() {
+    ifstream inFile(phoneBookFileName);
+    if (!inFile.is_open()) {
+        cout << "Unable to read phone book. Phone book not found." << endl;
+        return;
+    }
+
+    string line;
+    cout << "Phone Book:" << endl;
+    while (getline(inFile, line)) {
+        cout << line << endl;
+    }
+    inFile.close();
+}
+
+int main() {
+    int choice;
+    bool phoneBookCreated = false;
+    string name, number;  // Move variable declarations here
+
+    do {
+        cout << "Menu Options:" << endl;
+        cout << "1: Create Phone Book" << endl;
+        cout << "2: Add Contact" << endl;
+        cout << "3: Delete Phone Book" << endl;
+        cout << "4: Read Phone Book" << endl;
+        cout << "0: Exit the application" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                if (createPhoneBook()) {
+                    phoneBookCreated = true;
+                    cout << "Phone book created successfully." << endl;
+                } else {
+                    cout << "Unable to create a phone book." << endl;
+                }
+                break;
+            case 2:
+                if (!phoneBookCreated) {
+                    cout << "Unable to add contact. Phone book not found." << endl;
+                    break;
+                }
+                cin.ignore(); // Clear the newline character
+                cout << "Enter the contact's name and number: ";
+                getline(cin, name);
+                getline(cin, number);
+                if (addContact(name, number)) {
+                    cout << "Contact added successfully." << endl;
+                } else {
+                    cout << "Unable to add contact. Phone book not found." << endl;
+                }
+                break;
+            case 3:
+                if (deletePhoneBook()) {
+                    phoneBookCreated = false;
+                    cout << "Phone book deleted successfully." << endl;
+                } else {
+                    cout << "Unable to delete phone book." << endl;
+                }
+                break;
+            case 4:
+                readPhoneBook();
+                break;
+            case 0:
+                cout << "Exiting Phone Book Application." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 0);
+
+    return 0;
+}
