@@ -1,0 +1,71 @@
+ #include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm> // Include this header for reverse function
+#include <cstring>   // Include this header for memcmp function
+using namespace std;
+
+int main() {
+    // Read the input text from the user
+    string inputText;
+    cout << "Enter the input text: ";
+    getline(cin, inputText);
+
+    // Save the input text in "sample1.txt"
+    ofstream outFile1("sample1.txt");
+    if (!outFile1.is_open()) {
+        cout << "Error: Cannot open sample1.txt for writing." << endl;
+        return 1;
+    }
+    outFile1 << inputText;
+    outFile1.close();
+
+    // Reverse the input text and save it in "sample2.txt"
+    string reversedText = inputText;
+    reverse(reversedText.begin(), reversedText.end());
+    ofstream outFile2("sample2.txt");
+    if (!outFile2.is_open()) {
+        cout << "Error: Cannot open sample2.txt for writing." << endl;
+        return 1;
+    }
+    outFile2 << reversedText;
+    outFile2.close();
+
+    // Compare the contents of "sample1.txt" and "sample2.txt"
+    ifstream file1("sample1.txt", ios::binary);
+    ifstream file2("sample2.txt", ios::binary);
+
+    if (!file1.is_open() || !file2.is_open()) {
+        cout << "Error: Cannot open one or both files for comparison." << endl;
+        return 1;
+    }
+
+    const int bufferSize = 1024;
+    char buffer1[bufferSize];
+    char buffer2[bufferSize];
+
+    bool filesAreEqual = true;
+
+    while (!file1.eof() && !file2.eof()) {
+        file1.read(buffer1, bufferSize);
+        file2.read(buffer2, bufferSize);
+
+        if (file1.gcount() != file2.gcount() || memcmp(buffer1, buffer2, file1.gcount()) != 0) {
+            filesAreEqual = false;
+            break;
+        }
+    }
+
+    file1.close();
+    file2.close();
+
+    if (filesAreEqual) {
+        cout << "Comparing files..." << endl;
+        cout << "Files are the same." << endl;
+    } else {
+        cout << "Comparing files..." << endl;
+        cout << "Files differ." << endl;
+    }
+
+    return 0;
+}
