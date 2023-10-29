@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+struct Proc {
+    int prio;
+    int burst;
+    int arrival;
+    int wait;
+    int turnaround;
+};
+
+void calc_wait_turnaround(struct Proc p[], int n, int ctx_switch) {
+    int curr_time = 0;
+    int time_passed = 0;
+
+    for (int i = 0; i < n; i++) {
+        curr_time += ctx_switch; 
+
+        int highest_prio = 9999; 
+        int selected_proc = -1;
+
+        for (int j = 0; j < n; j++) {
+            if (p[j].arrival <= curr_time && p[j].prio < highest_prio) {
+                highest_prio = p[j].prio;
+                selected_proc = j;
+            }
+        }
+
+        if (selected_proc == -1) {
+            curr_time++;
+            i--;
+        } else {
+            p[selected_proc].wait = curr_time - p[selected_proc].arrival;
+            time_passed += p[selected_proc].burst;
+            p[selected_proc].turnaround = time_passed;
+            p[selected_proc].prio += p[selected_proc].wait / 2;
+            curr_time += p[selected_proc].burst;
+        }
+    }
+}
+
+int main() {
+    int n, ctx_switch;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+
+    struct Proc p[n];
+
+    printf("Enter the context switch time: ");
+    scanf("%d", &ctx_switch);
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter priority, burst time, and arrival time for process %d: ", i + 1);
+        scanf("%d %d %d", &p[i].prio, &p[i].burst, &p[i].arrival);
+    }
+
+    calc_wait_turnaround(p, n, ctx_switch);
+
+    printf("\nProc\tPrio\tBurst\tArrival\tWait\tTurnaround\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n",
+               i + 1, p[i].prio, p[i].burst, p[i].arrival, p[i].wait, p[i].turnaround);
+    }
+
+    return 0;
+}
