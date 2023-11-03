@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+class Cube {
+public:
+    int length;
+    Cube() : length(3) {}
+    ~Cube() { cout << length * length * length; }
+};
+int main() {
+    Cube* cubePtr = new Cube;
+    delete cubePtr;
+    return 0;
+}
