@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+class Table {
+public:
+    int length;
+    Table() : length(4) {}
+    ~Table() { cout << length * 2 + 1; }
+};
+int main() {
+    Table* tblPtr = new Table;
+    delete tblPtr;
+    return 0;
+}
