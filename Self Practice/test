@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+class Dog {
+public:
+    int age;
+    Dog(int initialAge) : age(initialAge) {}
+    ~Dog() { cout << age * 2; }
+};
+int main() {
+    Dog* dogPtr = new Dog(2); 
+    delete dogPtr;
+    return 0;
+}
