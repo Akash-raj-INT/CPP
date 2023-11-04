@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+
+struct TreeNode {
+    int key;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) : key(value), left(nullptr), right(nullptr) {}
+};
+
+TreeNode* insert(TreeNode* root, int key) {
+    if (root == nullptr) {
+        return new TreeNode(key);
+    }
+
+    if (key < root->key) {
+        root->left = insert(root->left, key);
+    } else if (key > root->key) {
+        root->right = insert(root->right, key);
+    }
+
+    return root;
+}
+
+bool findAncestors(TreeNode* root, int key, std::vector<int>& ancestors) {
+    if (root == nullptr) {
+        return false;
+    }
+
+    if (root->key == key) {
+        return true;
+    }
+
+    if (findAncestors(root->left, key, ancestors) || findAncestors(root->right, key, ancestors)) {
+        ancestors.push_back(root->key);
+        return true;
+    }
+
+    return false;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    TreeNode* root = nullptr;
+
+    for (int i = 0; i < n; i++) {
+        int value;
+        std::cin >> value;
+        root = insert(root, value);
+    }
+
+    int key;
+    std::cin >> key;
+
+    std::vector<int> ancestors;
+    findAncestors(root, key, ancestors);
+
+    for (int i = 0; i < ancestors.size(); i++) {
+        std::cout << ancestors[i] << " ";
+    }
+
+    return 0;
+}
