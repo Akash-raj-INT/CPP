@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_SIZE 100 // Maximum stack size
+
+// Define a stack structure
+struct Stack {
+    char data[MAX_SIZE];
+    int top;
+};
+
+// Function to initialize the stack
+void init(struct Stack *stack) {
+    stack->top = -1;
+}
+
+// Function to push an element onto the stack
+void push(struct Stack *stack, char item) {
+    if (stack->top == MAX_SIZE - 1) {
+        printf("Stack overflow\n");
+    } else {
+        stack->data[++stack->top] = item;
+    }
+}
+
+// Function to pop an element from the stack
+char pop(struct Stack *stack) {
+    if (stack->top == -1) {
+        printf("Stack is empty\n");
+        return '\0'; // Return a null character to indicate an error
+    } else {
+        return stack->data[stack->top--];
+    }
+}
+
+// Function to reverse a string using a stack
+void reverseString(char *inputString) {
+    struct Stack stack;
+    init(&stack);
+
+    int length = strlen(inputString);
+
+    // Push each character from the input string onto the stack
+    for (int i = 0; i < length; i++) {
+        push(&stack, inputString[i]);
+    }
+
+    // Pop characters from the stack to build the reversed string
+    for (int i = 0; i < length; i++) {
+        inputString[i] = pop(&stack);
+    }
+}
+
+int main() {
+    char inputString[] = "Hello, World!";
+    reverseString(inputString);
+    printf("Reversed string: %s\n", inputString); // Output: "!dlroW ,olleH"
+    return 0;
+}
