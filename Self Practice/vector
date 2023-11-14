@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+
+const int TABLE_SIZE = 10;
+
+int quadraticProbe(int index, int iteration) {
+    return (index + iteration * iteration) % TABLE_SIZE;
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    std::vector<int> speeds(n);
+
+    for (int i = 0; i < n; ++i) {
+        std::cin >> speeds[i];
+    }
+
+    std::vector<int> hashTable(TABLE_SIZE, -1);
+
+    for (int i = 0; i < n; ++i) {
+        int index = speeds[i] % TABLE_SIZE;
+
+        if (hashTable[index] == -1) {
+            // If the slot is empty, insert the speed directly
+            hashTable[index] = speeds[i];
+        } else {
+            // Handle collision using quadratic probing
+            int iteration = 1;
+            while (hashTable[quadraticProbe(index, iteration)] != -1) {
+                iteration++;
+            }
+            index = quadraticProbe(index, iteration);
+            hashTable[index] = speeds[i];
+        }
+    }
+
+    // Find the fastest speed and its index
+    int fastestSpeed = -1;
+    int fastestIndex = -1;
+
+    for (int i = 0; i < TABLE_SIZE; ++i) {
+        if (hashTable[i] != -1 && hashTable[i] > fastestSpeed) {
+            fastestSpeed = hashTable[i];
+            fastestIndex = i;
+        }
+    }
+
+    std::cout << "Fastest bike speed: " << fastestSpeed << ", Index: " << fastestIndex << std::endl;
+
+    return 0;
+}
