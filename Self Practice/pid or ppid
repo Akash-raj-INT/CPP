@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  // Create process P1
+  pid_t pid = fork();
+  if (pid == 0) {
+    // Process P1
+    printf("Process P1 (PID: %d), parent process ID (PPID): %d\n", getpid(), getppid());
+
+    // Create process P2
+    pid = fork();
+    if (pid == 0) {
+      // Process P2
+      printf("Process P2 (PID: %d), parent process ID (PPID): %d\n", getpid(), getppid());
+
+      // Create process P3
+      pid = fork();
+      if (pid == 0) {
+        // Process P3
+        printf("Process P3 (PID: %d), parent process ID (PPID): %d\n", getpid(), getppid());
+      } else {
+        // Wait for process P3 to finish
+        waitpid(pid, NULL, 0);
+      }
+    } else {
+      // Wait for process P2 to finish
+      waitpid(pid, NULL, 0);
+    }
+  } else {
+    // Wait for process P1 to finish
+    waitpid(pid, NULL, 0);
+  }
+
+  return 0;
+}
