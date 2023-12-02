@@ -1,0 +1,17 @@
+#include <iostream>
+
+int main() {
+    int limit;
+    std::cout << "Enter the limit: ";
+    std::cin >> limit;
+
+    int sum = 0;
+
+    for (int i = 1; i <= limit; i += 2) {
+        sum += i;
+    }
+
+    std::cout << "Sum of odd numbers up to " << limit << " is: " << sum << std::endl;
+
+    return 0;
+}
