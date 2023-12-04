@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+  
+  //add code below this line
+
+
+string classes[] = {"Math", "English", "Science", "Social Studies", "Spanish"};
+
+classes[4] = "French";
+
+for (int i = 0; i < sizeof(classes)/sizeof(classes[0]); i++) {
+  cout << classes[i] << endl;
+}
+  //add code above this line
+  
+  return 0;
+  
+}
