@@ -1,0 +1,11 @@
+Certainly! To print "Hello, World!" in Java, you can use the following code:
+
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+Save this code in a file named `HelloWorld.java` and then compile and run it using a Java compiler.
