@@ -1,0 +1,41 @@
+Certainly! Here's a simple example of multiple inheritance in C++:
+
+```cpp
+#include <iostream>
+
+// Base class 1
+class Base1 {
+public:
+    void display1() {
+        std::cout << "Base1 Display\n";
+    }
+};
+
+// Base class 2
+class Base2 {
+public:
+    void display2() {
+        std::cout << "Base2 Display\n";
+    }
+};
+
+// Derived class inheriting from both Base1 and Base2
+class Derived : public Base1, public Base2 {
+public:
+    void displayDerived() {
+        std::cout << "Derived Display\n";
+    }
+};
+
+int main() {
+    Derived obj;
+
+    obj.display1();        // Accessing Base1 member function
+    obj.display2();        // Accessing Base2 member function
+    obj.displayDerived();  // Accessing Derived member function
+
+    return 0;
+}
+```
+
+In this example, the `Derived` class is derived from both `Base1` and `Base2`, showcasing multiple inheritance. The object of the `Derived` class has access to the member functions of both base classes as well as its own member function.
