@@ -1,0 +1,59 @@
+Hybrid inheritance in C++ involves a combination of different types of inheritance, such as multiple inheritance and multilevel inheritance. Here's an example:
+
+```cpp
+#include <iostream>
+
+// Base class 1
+class Base1 {
+public:
+    void display1() {
+        std::cout << "Base1 Display\n";
+    }
+};
+
+// Base class 2
+class Base2 {
+public:
+    void display2() {
+        std::cout << "Base2 Display\n";
+    }
+};
+
+// Derived class 1 inheriting from Base1
+class Derived1 : public Base1 {
+public:
+    void displayDerived1() {
+        std::cout << "Derived1 Display\n";
+    }
+};
+
+// Derived class 2 inheriting from Base2
+class Derived2 : public Base2 {
+public:
+    void displayDerived2() {
+        std::cout << "Derived2 Display\n";
+    }
+};
+
+// Final derived class inheriting from both Derived1 and Derived2
+class FinalDerived : public Derived1, public Derived2 {
+public:
+    void displayFinal() {
+        std::cout << "FinalDerived Display\n";
+    }
+};
+
+int main() {
+    FinalDerived obj;
+
+    obj.display1();         // Accessing Base1 member function
+    obj.display2();         // Accessing Base2 member function
+    obj.displayDerived1();  // Accessing Derived1 member function
+    obj.displayDerived2();  // Accessing Derived2 member function
+    obj.displayFinal();     // Accessing FinalDerived member function
+
+    return 0;
+}
+```
+
+In this example, `FinalDerived` is derived from both `Derived1` and `Derived2`, demonstrating multiple inheritance. Additionally, `Derived1` and `Derived2` individually use multilevel inheritance by inheriting from their respective base classes (`Base1` and `Base2`). This combination illustrates hybrid inheritance in C
