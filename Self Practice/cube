@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+
+class RubiksCube {
+private:
+    std::vector<std::vector<char>> cube;
+
+public:
+    RubiksCube() {
+        // Initialize a solved Rubik's Cube
+        cube = {{'R', 'R', 'R'}, {'G', 'G', 'G'}, {'B', 'B', 'B'},
+                {'O', 'O', 'O'}, {'W', 'W', 'W'}, {'Y', 'Y', 'Y'}};
+    }
+
+    void printCube() {
+        for (const auto &row : cube) {
+            for (char sticker : row) {
+                std::cout << sticker << ' ';
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
+    // Add your cube-solving algorithms here
+
+};
+
+int main() {
+    RubiksCube cube;
+    
+    std::cout << "Initial Cube State:" << std::endl;
+    cube.printCube();
+
+    // Call cube-solving algorithms here
+
+    std::cout << "Final Cube State:" << std::endl;
+    cube.printCube();
+
+    return 0;
+}
