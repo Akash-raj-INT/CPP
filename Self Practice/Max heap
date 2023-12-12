@@ -1,0 +1,84 @@
+Certainly! Here's a simple implementation of a max heap in C++:
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class MaxHeap {
+private:
+    std::vector<int> heap;
+
+    void heapifyUp() {
+        int index = heap.size() - 1;
+        while (index > 0) {
+            int parentIndex = (index - 1) / 2;
+            if (heap[index] > heap[parentIndex]) {
+                std::swap(heap[index], heap[parentIndex]);
+                index = parentIndex;
+            } else {
+                break;
+            }
+        }
+    }
+
+    void heapifyDown() {
+        int index = 0;
+        while (true) {
+            int leftChildIndex = 2 * index + 1;
+            int rightChildIndex = 2 * index + 2;
+            int largest = index;
+
+            if (leftChildIndex < heap.size() && heap[leftChildIndex] > heap[largest]) {
+                largest = leftChildIndex;
+            }
+
+            if (rightChildIndex < heap.size() && heap[rightChildIndex] > heap[largest]) {
+                largest = rightChildIndex;
+            }
+
+            if (largest != index) {
+                std::swap(heap[index], heap[largest]);
+                index = largest;
+            } else {
+                break;
+            }
+        }
+    }
+
+public:
+    void insert(int value) {
+        heap.push_back(value);
+        heapifyUp();
+    }
+
+    int extractMax() {
+        if (heap.empty()) {
+            return -1; // or any appropriate value to indicate an empty heap
+        }
+
+        int maxValue = heap[0];
+        heap[0] = heap.back();
+        heap.pop_back();
+        heapifyDown();
+        return maxValue;
+    }
+};
+
+int main() {
+    MaxHeap maxHeap;
+
+    maxHeap.insert(90);
+    maxHeap.insert(85);
+    maxHeap.insert(80);
+    maxHeap.insert(75);
+    maxHeap.insert(50);
+    maxHeap.insert(70);
+    maxHeap.insert(65);
+
+    std::cout << "Max value extracted: " << maxHeap.extractMax() << std::endl;
+
+    return 0;
+}
+```
+
+This C++ code defines a `MaxHeap` class with methods for inserting elements and extracting the maximum element. The `heap
