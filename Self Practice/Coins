@@ -1,0 +1,27 @@
+Certainly! Here's a simple C++ code that calculates the probability of different outcomes when flipping two coins:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    // Assuming fair coins
+    const double probability_head = 0.5;
+    const double probability_tail = 0.5;
+
+    // Probability of different outcomes
+    double both_heads = probability_head * probability_head;
+    double one_head_one_tail = 2 * probability_head * probability_tail; // Two ways: H1T2 or T1H2
+    double both_tails = probability_tail * probability_tail;
+
+    // Output probabilities
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Probability of both heads: " << both_heads << std::endl;
+    std::cout << "Probability of one head and one tail: " << one_head_one_tail << std::endl;
+    std::cout << "Probability of both tails: " << both_tails << std::endl;
+
+    return 0;
+}
+```
+
+This code assumes fair coins, so the probabilities of getting heads or tails for each coin are both set to 0.5. Adjust the probabilities accordingly if the coins are biased.
