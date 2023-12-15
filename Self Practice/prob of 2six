@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(0)));
+
+    // Number of trials
+    const int num_trials = 1000000;
+
+    // Count of successful outcomes (rolling two sixes)
+    int success_count = 0;
+
+    // Simulate rolling two dice and count successful outcomes
+    for (int i = 0; i < num_trials; ++i) {
+        // Roll two six-sided dice
+        int die1 = std::rand() % 6 + 1; // Random number between 1 and 6
+        int die2 = std::rand() % 6 + 1;
+
+        // Check if both dice show six
+        if (die1 == 6 && die2 == 6) {
+            success_count++;
+        }
+    }
+
+    // Calculate the probability
+    double probability = static_cast<double>(success_count) / num_trials;
+
+    // Output the result
+    std::cout << "Probability of rolling two sixes: " << probability << std::endl;
+
+    return 0;
+}
