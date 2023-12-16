@@ -1,0 +1,25 @@
+Certainly! Here's a simple example of using a list in C++:
+
+```cpp
+#include <iostream>
+#include <list>
+
+int main() {
+    // Declare a list of integers
+    std::list<int> mylist;
+
+    // Add elements to the list
+    mylist.push_back(10);
+    mylist.push_back(20);
+    mylist.push_back(30);
+
+    // Iterate through the list and print elements
+    for (const auto& element : mylist) {
+        std::cout << element << " ";
+    }
+
+    return 0;
+}
+```
+
+This program creates a list of integers, adds three elements to it, and then iterates through the list to print each element.
