@@ -1,0 +1,36 @@
+Certainly! Here's a simple example of using a `std::set` in C++:
+
+```cpp
+#include <iostream>
+#include <set>
+
+int main() {
+    // Declare a set of integers
+    std::set<int> mySet;
+
+    // Insert elements into the set
+    mySet.insert(3);
+    mySet.insert(1);
+    mySet.insert(4);
+    mySet.insert(2);
+
+    // Iterate through the set and print elements
+    std::cout << "Set elements: ";
+    for (const auto& element : mySet) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+
+    // Check if an element is present in the set
+    int searchElement = 3;
+    if (mySet.find(searchElement) != mySet.end()) {
+        std::cout << searchElement << " is present in the set." << std::endl;
+    } else {
+        std::cout << searchElement << " is not present in the set." << std::endl;
+    }
+
+    return 0;
+}
+```
+
+This code demonstrates the basics of declaring a set, inserting elements, iterating through the set, and checking if a specific element is present in the set.
