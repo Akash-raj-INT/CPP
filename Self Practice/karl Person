@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath>
+
+double calculateMean(const double arr[], int size) {
+    double sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += arr[i];
+    }
+    return sum / size;
+}
+
+double calculatePearsonCoefficient(const double x[], const double y[], int size) {
+    double sum_xy = 0, sum_x = 0, sum_y = 0, sum_x_squared = 0, sum_y_squared = 0;
+
+    for (int i = 0; i < size; ++i) {
+        sum_xy += x[i] * y[i];
+        sum_x += x[i];
+        sum_y += y[i];
+        sum_x_squared += std::pow(x[i], 2);
+        sum_y_squared += std::pow(y[i], 2);
+    }
+
+    double n = static_cast<double>(size);
+
+    double numerator = n * sum_xy - sum_x * sum_y;
+    double denominator = std::sqrt((n * sum_x_squared - std::pow(sum_x, 2)) * (n * sum_y_squared - std::pow(sum_y, 2)));
+
+    return numerator / denominator;
+}
+
+int main() {
+    const int size = 5; // You can change the size of your data
+
+    // Example data
+    double x[size] = {1, 2, 3, 4, 5};
+    double y[size] = {2, 3, 4, 5, 6};
+
+    // Calculate Pearson's correlation coefficient
+    double correlationCoefficient = calculatePearsonCoefficient(x, y, size);
+
+    // Output the result
+    std::cout << "Pearson's Correlation Coefficient: " << correlationCoefficient << std::endl;
+
+    return 0;
+}
