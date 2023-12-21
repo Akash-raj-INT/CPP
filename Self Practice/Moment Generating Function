@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cmath>
+
+// Define a simple random variable class
+class RandomVariable {
+public:
+    double mean;
+    double variance;
+
+    RandomVariable(double mean, double variance) : mean(mean), variance(variance) {}
+
+    // Moment Generating Function
+    double momentGeneratingFunction(double t) {
+        return exp(mean * t + 0.5 * variance * t * t);
+    }
+};
+
+int main() {
+    // Create a random variable with mean 2 and variance 4
+    RandomVariable myRandomVariable(2.0, 4.0);
+
+    // Evaluate the MGF at t = 1
+    double t = 1.0;
+    double mgfValue = myRandomVariable.momentGeneratingFunction(t);
+
+    // Print the result
+    std::cout << "Moment Generating Function at t = " << t << ": " << mgfValue << std::endl;
+
+    return 0;
+}
