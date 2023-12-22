@@ -1,0 +1,30 @@
+Certainly! If you want a simple C++ code that counts the number of vowels in a given string, here's an example:
+
+```cpp
+#include <iostream>
+#include <cctype>
+
+int countVowels(const std::string& str) {
+    int count = 0;
+    for (char ch : str) {
+        char lowercaseCh = std::tolower(ch);
+        if (lowercaseCh == 'a' || lowercaseCh == 'e' || lowercaseCh == 'i' || lowercaseCh == 'o' || lowercaseCh == 'u') {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    std::string input;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, input);
+
+    int vowelCount = countVowels(input);
+    std::cout << "Number of vowels: " << vowelCount << std::endl;
+
+    return 0;
+}
+```
+
+This code defines a function `countVowels` that takes a string as input and counts the number of vowels in it. The `main` function then takes user input, calls the `countVowels` function, and prints the result.
