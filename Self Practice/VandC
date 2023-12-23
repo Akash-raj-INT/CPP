@@ -1,0 +1,37 @@
+Certainly! Here's a simple example in C++ that separates vowels and consonants in a given word:
+
+```cpp
+#include <iostream>
+#include <cctype> // For isalpha function
+
+void separateVowelsAndConsonants(const std::string& word) {
+    std::string vowels;
+    std::string consonants;
+
+    for (char ch : word) {
+        if (isalpha(ch)) {
+            char lowercaseCh = tolower(ch); // Convert to lowercase for case-insensitivity
+            if (lowercaseCh == 'a' || lowercaseCh == 'e' || lowercaseCh == 'i' || lowercaseCh == 'o' || lowercaseCh == 'u') {
+                vowels += ch;
+            } else {
+                consonants += ch;
+            }
+        }
+    }
+
+    std::cout << "Vowels: " << vowels << std::endl;
+    std::cout << "Consonants: " << consonants << std::endl;
+}
+
+int main() {
+    std::string userInput;
+    std::cout << "Enter a word: ";
+    std::cin >> userInput;
+
+    separateVowelsAndConsonants(userInput);
+
+    return 0;
+}
+```
+
+This C++ program prompts the user to enter a word, separates the vowels and consonants, and then prints the results. Adjust it as needed for your specific requirements.
